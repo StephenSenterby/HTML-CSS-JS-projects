@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book - Discover & Share Culinary Delights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>Recipe Book</span>
+            </div>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for recipes...">
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="randomRecipeBtn">
+                    <i class="fas fa-random"></i> Random Recipe
+                </button>
+                <button class="btn btn-primary" id="addRecipeBtn">
+                    <i class="fas fa-plus"></i> Add Recipe
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="filter-section">
+            <h2>Browse Recipes</h2>
+            <div class="filter-container" id="filterContainer">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="breakfast">Breakfast</button>
+                <button class="filter-btn" data-category="lunch">Lunch</button>
+                <button class="filter-btn" data-category="dinner">Dinner</button>
+                <button class="filter-btn" data-category="dessert">Dessert</button>
+                <button class="filter-btn" data-category="snack">Snack</button>
+                <button class="filter-btn" data-category="beverage">Beverage</button>
+                <button class="filter-btn" data-category="vegetarian">Vegetarian</button>
+                <button class="filter-btn" data-category="vegan">Vegan</button>
+                <button class="filter-btn" data-category="gluten-free">Gluten-Free</button>
+            </div>
+        </section>
+
+        <section class="recipe-grid" id="recipeGrid">
+            <!-- Recipe cards will be dynamically inserted here -->
+        </section>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-search"></i>
+            <h3>No recipes found</h3>
+            <p>Try adjusting your search or filters</p>
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal -->
+    <div class="modal" id="recipeModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img class="modal-recipe-image" id="modalRecipeImage" src="" alt="">
+            <h2 class="modal-recipe-title" id="modalRecipeTitle"></h2>
+            <div class="modal-recipe-meta">
+                <span id="modalRecipeTime"></span>
+                <span id="modalRecipeServings"></span>
+                <span id="modalRecipeDifficulty"></span>
+            </div>
+            <div class="modal-section">
+                <h3>Ingredients</h3>
+                <ul class="ingredients-list" id="modalIngredients"></ul>
+            </div>
+            <div class="modal-section">
+                <h3>Instructions</h3>
+                <ol class="instructions-list" id="modalInstructions"></ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Recipe Modal -->
+    <div class="modal" id="addRecipeModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeAddModal">&times;</span>
+            <h2>Add Your Recipe</h2>
+            <form id="addRecipeForm">
+                <div class="form-group">
+                    <label for="recipeName">Recipe Name</label>
+                    <input type="text" class="form-control" id="recipeName" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="recipeCategory">Category</label>
+                        <select class="form-control" id="recipeCategory" required>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="dessert">Dessert</option>
+                            <option value="snack">Snack</option>
+                            <option value="beverage">Beverage</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="gluten-free">Gluten-Free</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeDifficulty">Difficulty</label>
+                        <select class="form-control" id="recipeDifficulty" required>
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="recipeTime">Prep Time (minutes)</label>
+                        <input type="number" class="form-control" id="recipeTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeServings">Servings</label>
+                        <input type="number" class="form-control" id="recipeServings" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="recipeDescription">Description</label>
+                    <textarea class="form-control" id="recipeDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recipeIngredients">Ingredients (one per line)</label>
+                    <textarea class="form-control" id="recipeIngredients" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recipeInstructions">Instructions (one step per line)</label>
+                    <textarea class="form-control" id="recipeInstructions" rows="8" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Recipe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Recipe Book</h3>
+                <p>Discover, share, and explore a world of culinary delights. From quick weeknight dinners to elaborate holiday feasts, find your next favorite recipe here.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Popular Recipes</a></li>
+                    <li><a href="#">Seasonal Collections</a></li>
+                    <li><a href="#">Cooking Tips</a></li>
+                    <li><a href="#">Kitchen Tools</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+        
+    <script src="script.js"></script>
+    </body>
+</html>
