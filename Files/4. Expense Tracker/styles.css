@@ -1,0 +1,219 @@
+/*   Global Styles   */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #FF6A00, #f505d5);
+    color: #333;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/*   Layout Containers   */
+
+.container {
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffd2bb, #790303); /* Matches body gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+    text-shadow: black;
+}
+
+
+/* Optional smooth hover glow */
+h1:hover {
+    transform: translateY(-2px);
+    text-shadow: black;
+}
+
+/*   Glassmorphism + Card Improvements  */
+
+.balance-container,
+.summary,
+.expenses,
+.transaction-container,
+.form-container {
+    background: rgba(255, 255, 255, 0.45); /* Slightly more transparent */
+    backdrop-filter: blur(20px); /* Increased blur */
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15); /* Sharper shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*   Hover Animation for Cards   */
+
+.balance-container:hover,
+.summary:hover,
+.expenses:hover,
+.transaction-container:hover,
+.form-container:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0, 0.2);
+}
+
+.balance-container h2 {
+    font-weight: 500;
+    color: #555;
+}
+
+#balance {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #50E3C2;
+}
+
+/*   Summary Box   */
+
+.summary h3 {
+    color: #50E3C2;
+}
+
+.expenses h3 {
+    color: #F5A623;
+}
+
+#income-amount {
+    font-size: 1.5rem;
+    color: #50E3C2;
+}
+
+#expense-amount {
+    font-size: 1.5rem;
+    color: #F5A623;
+}
+
+/*   Main Content Layout   */
+
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: start;
+}
+
+
+/*   Transaction List   */
+
+#transaction-list {
+    list-style: none;
+    margin-top: 10px;
+}
+
+#transaction-list li {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 12px 15px;
+    border-left: 6px solid;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    
+    /* Smooth hover animation */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+/* Hover effect for list items */
+#transaction-list li:hover {
+    transform: translateX(8px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+}
+
+.income {
+    border-color: #50E3C2;
+    color: #50E3C2;
+}
+
+.expense {
+    border-color: #F5A623;
+    color: #F5A623;
+}
+
+/*   Form Styling   */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #e1e7ef;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 10px rgba(74,144,226,0.3);
+}
+
+small {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/*   Button Styling   */
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: linear-gradient(135deg, #4A90E2, #50E3C2);
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    opacity: 0.95;
+}
+
+/*   Responsive Design   */
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+}
